@@ -23,6 +23,15 @@ jobs:
 
       - name: Build app
         run: scripts/buildprod.sh
+      
+      - name: Setup goose
+        uses: mscno/setup-goose@v1
+
+      - name: Install gcloud
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Run Migrations
+        run: ./scripts/migrateup.sh
 
       - name: Fake Deploy
         run: gcloud builds submit || true
